@@ -1,4 +1,6 @@
 #lang reader "stacker.rkt"
-foo
-bar
-zam
+1
++
+2
+*
+3ß
