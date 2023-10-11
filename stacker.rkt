@@ -9,8 +9,16 @@
   ; quasiquoted module with multiple values, inserted with `,@`
   ; e.g. '((handle 1) (handle +) (handle 1))
   (define module-datum `(module stacker-mod "stacker.rkt" ,@src-datums))
-  ; convert quoted syntax into datumß
+  ; convert quoted syntax into datum
   (datum->syntax #f module-datum))
 
 ; make read-syntax public
 (provide read-syntax) 
+
+; HANDLE-EXPR ... will match each line of code passed to macro
+; a.k.a `pattern variable`
+(define-macro (stacker-module-begin HANDLE-EXPR ...)
+  ; optional import of `#%module-begin`
+  #'(#%module-begin
+     'HANDLE-EXPR ...))
+(provide (rename-out [stacker-module-begin #%module-begin]))
